@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script id="book-template" type="text/x-handlebars-template">
+      <hr>
+      <li>Message: "{{name}}"</li>
+      <li>Username: "{{author}}"</li>
+      <hr>
+  </script>
     <title>Ajax is fun</title>
 </head>
 <body>
@@ -26,8 +32,10 @@
         <input id="mess2" autocomplete="off" required placeholder="user"/>
         <button>Send</button>
       </form>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script> 
       <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>  
+  <script src="/applette.js"></script>
   <script>
     $(() => {
       var socket = io()
