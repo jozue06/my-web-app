@@ -31,7 +31,7 @@ io.on('connection', socket => {
   });
 });
 
-server.listen(3000, () => {
+server.listen(4000, () => {
   console.log('The server is running: http://localhost:4000');
 });
 
