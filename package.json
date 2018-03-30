@@ -1,0 +1,16 @@
+{
+  "name": "realtime-chat",
+  "scripts": {
+    "start": "node index"
+  },
+  "dependencies": {
+    "express": "latest"
+  },
+
+  "keywords": [
+    "messages"
+  ],
+  "author": "Josh McClung",
+  "license": "ISC"
+}
+
