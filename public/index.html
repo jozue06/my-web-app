@@ -35,32 +35,8 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script> 
       <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>  
-  <script src="/applette.js"></script>
+  <script src="applette.js"></script>
   <script>
-    $(() => {
-      var socket = io()
-  
-      $('form').submit(() => {
-        socket.emit('chat message', $('#mess').val())
-        $('#mess').val('');
-        socket.emit('chat message', $('#mess2').val())
-        $('#mess2').val('');
-        // socket.emit('user', $('#user').val())
-        // $('#user').val('');
-        
-        return false
-      })
-    //   socket.on('user', usr => {    
-    //     $('#usr').append($('<li>').text(usr))
-    //   });
-    // socket.on('chat message', msg => {
-    //     $('#messages').append($('<li>').text(msg))
-    //   });
-      socket.on('chat message', msg => {
-        $('#messages').append($('<li>').text(msg))
-      });
-     
-    });
   </script>
 </body>
 </html>

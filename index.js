@@ -6,27 +6,26 @@ const express = require('express');
 
 
 
-const books = [
-  {}
-];
+const messages = [];
 
 
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended:true}));
 
-app.get('/books', (req, res)=>{
-  books.push(req.body);
-  res.status(200).send('success');
-
+app.get('/messages', (req, res)=>{
+  res.send(messages);
 });
 
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html');
-});
+// app.get('/', (req, res) => {
+//   res.sendFile(__dirname + '/index.html');
+// });
+
+app.use(express.static('public'));
 
 io.on('connection', socket => {
   socket.on('chat message', msg => {
+    messages.push(msg);
     io.emit('chat message', msg);
   });
 });
