@@ -2,14 +2,11 @@
 // const render = Handlebars.compile(template);
 
 
-$.get('/messages').then(messages => {
-  $('#chat').append($('<li>').text(messages));
-  // console.log(messages);
-});
-// var socket = io();
+
+
 // $(() => {
   
-
+// var socket = io();
 //   $('form').submit(() => {
 
 //     socket.on('chat message', function (data) {
@@ -36,6 +33,11 @@ $.get('/messages').then(messages => {
 
 
 $(function() {
+
+  $.get('/messages').then(messages => {
+    $('#chat').append($('<li>').text(messages));
+    console.log(messages);
+  });
   var FADE_TIME = 150; // ms
   // var COLORS = [
   //   '#e21400', '#91580f', '#f8a700', '#f78b00',
@@ -49,21 +51,21 @@ $(function() {
   var $usernameInput = $('.userName'); // Input for username
   var $messages = $('.messages'); // Messages area
   var $inputMessage = $('.inputMessage'); // Input message input box
-  var username;
+  // var username;
 
   var $chatPage = $('.chat.page'); // The chatroom page
 
   $chatPage.show();
 
   // Sets the client's username
-  function setUsername () {
-    username = $usernameInput.val('');
-  }
+  // function setUsername () {
+  //   var username = $usernameInput.val('');
+  // }
 
   // $currentInput = $inputMessage.focus();
 
   // Tell the server your username
-  socket.emit('add user', username);
+  
 
 
   // Sends a chat message
@@ -71,15 +73,14 @@ $(function() {
     var message = $inputMessage.val();
     message = cleanInput(message);
     var username = $usernameInput.val();
-    if (message) {
-      $inputMessage.val('');
-      $usernameInput.val('');
-      addChatMessage({
-        username: username,
-        message: message
-      });
-      socket.emit('new message', message);
-    }
+    $inputMessage.val('');
+    $usernameInput.val('');
+    // addChatMessage({
+    //   username: username,
+    //   message: message
+    // });
+    socket.emit('new message', message);
+    socket.emit('add user', username);
   }
 
   function addChatMessage (data, options) {
@@ -96,6 +97,7 @@ $(function() {
       .append($usernameDiv, $messageBodyDiv);
 
     addMessageElement($messageDiv, options);
+    console.log('message added? ' + data.username + " " + data.message);
   }
 
   // Adds a message element to the messages and scrolls to the bottom
@@ -139,8 +141,7 @@ $(function() {
 
     if (event.which === 13) {
       sendMessage();
-      setUsername();
-
+      // setUsername();
     }
   });
 
@@ -149,8 +150,11 @@ $(function() {
   });
 
 
-  socket.on('new message', function (data) {
-    addChatMessage(data);
+  socket.on('new message', function (message) {
+    addChatMessage(message);
   });
 
+  socket.on('add user', function (username){
+    addChatMessage(username);
+  });
 });
