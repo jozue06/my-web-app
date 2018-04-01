@@ -1,13 +1,12 @@
-const app = require('express')();
-const server = require('http').Server(app);
+
 const io = require('socket.io')(server);
 const cors = require('cors');
-const express = require('express');
-
-
+var express = require('express');
+var app = express();
+var server = require('http').createServer(app);
+var port = process.env.PORT || 3000;
 
 const chatHistory = [];
-
 
 app.use(cors());
 app.use(express.json());
@@ -17,22 +16,18 @@ app.get('/messages', (req, res)=>{
   res.send(chatHistory);
 });
 
-
 app.use(express.static('public'));
 
-io.on('connection', socket => {
-  socket.on('chat message', msg => {
-    io.emit('chat message', msg);
-    socket.on('usr', usr => {
-      io.emit('usr', usr);
-      // chatHistory.push(msg, usr);
+server.listen(port, function () {
+  console.log('Server listening at port %d', port);
+});
+
+io.on('connection', function (socket) {
+  socket.on('new message', function (data) {
+    socket.emit('new message', {
+      username: socket.username,
+      message: data
     });
-    
-      
+    chatHistory.push(data);
   });
 });
-
-server.listen(4000, () => {
-
-});
-
