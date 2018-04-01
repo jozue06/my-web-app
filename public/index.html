@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script id="book-template" type="text/x-handlebars-template">
+    <link rel="stylesheet" href="styles/style.css">
+    <script id="template" type="text/x-handlebars-template">
       <hr>
       <li>Message: "{{name}}"</li>
       <li>Username: "{{author}}"</li>
@@ -13,23 +14,10 @@
     <title>Ajax is fun</title>
 </head>
 <body>
-
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font: 13px Helvetica, Arial; }
-        form { background: grey; padding: 10px; position: fixed; bottom: 0; width: 100%; }
-        form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
-        form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
-        #mess2 { font-style: italic; }
-        #messages { list-style-type: none; margin: 0; padding: 0; }
-        #messages li { padding: 5px 10px; }
-        #messages li:nth-child(odd) { background: #eee; }
-      </style>
-      <ul id="messages"></ul>
-      <ul id="usr"></ul>      
+      <ul id="chat"></ul>    
       <form action="submit">
         <input id="mess" autocomplete="off" required placeholder="message"/>
-        <input id="mess2" autocomplete="off" required placeholder="user"/>
+        <input id="usr" autocomplete="off" required placeholder="user"/>
         <button>Send</button>
       </form>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script> 

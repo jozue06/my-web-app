@@ -6,7 +6,7 @@ const express = require('express');
 
 
 
-const messages = [];
+const chatHistory = [];
 
 
 app.use(cors());
@@ -14,23 +14,25 @@ app.use(express.json());
 app.use(express.urlencoded({ extended:true}));
 
 app.get('/messages', (req, res)=>{
-  res.send(messages);
+  res.send(chatHistory);
 });
 
-// app.get('/', (req, res) => {
-//   res.sendFile(__dirname + '/index.html');
-// });
 
 app.use(express.static('public'));
 
 io.on('connection', socket => {
   socket.on('chat message', msg => {
-    messages.push(msg);
     io.emit('chat message', msg);
+    socket.on('usr', usr => {
+      io.emit('usr', usr);
+      // chatHistory.push(msg, usr);
+    });
+    
+      
   });
 });
 
 server.listen(4000, () => {
-  console.log('The server is running: http://localhost:4000');
+
 });
 

@@ -27,16 +27,33 @@ form button {
     padding: 10px;
 }
 
-#messages {
+#message {
     list-style-type: none;
     margin: 0;
     padding: 0;
 }
 
-#messages li {
+#message li {
     padding: 5px 10px;
 }
 
-#messages li:nth-child(odd) {
+#message li:nth-child(odd) {
     background: #eee;
+}
+
+#usr {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    font-style: italic;
+}
+
+#usr {
+    padding: 5px 10px;
+    font-style: italic;
+}
+
+#usr li:nth-child(odd) {
+    background: #eee;
+    font-style: italic;
 }
