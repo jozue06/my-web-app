@@ -51,7 +51,7 @@ $(function() {
   var $usernameInput = $('.userName'); // Input for username
   var $messages = $('.messages'); // Messages area
   var $inputMessage = $('.inputMessage'); // Input message input box
-  // var username;
+  var username;
 
   var $chatPage = $('.chat.page'); // The chatroom page
 
@@ -73,30 +73,29 @@ $(function() {
     var message = $inputMessage.val();
     message = cleanInput(message);
     var username = $usernameInput.val();
+    // This section clears out input fields:
+    console.log(username);
     $inputMessage.val('');
     $usernameInput.val('');
-    // addChatMessage({
-    //   username: username,
-    //   message: message
-    // });
-    socket.emit('new message', message);
-    socket.emit('add user', username);
-  }
 
-  function addChatMessage (data, options) {
+    addChatMessage({
+      username: username,
+      message: message
+    });
+    
+    
+  };
 
+  function addChatMessage (data) {
 
-    var $usernameDiv = $('<span class="username"/>')
-      .text(data.username);
-    var $messageBodyDiv = $('<span class="messageBody">')
-      .text(data.message);
+    var $messageBodyDiv = $('<span class="messageBody">').text(data.message);
+    var $usernameDiv = $('<span class="username"/>').text(data.username);
+    var $messageDiv = $('<li class="message"/>').data('username', data.username).append($usernameDiv, $messageBodyDiv);
+    socket.emit('add user', data.username);
+    socket.emit('new message', data.message);
+  
 
-
-    var $messageDiv = $('<li class="message"/>')
-      .data('username', data.username)
-      .append($usernameDiv, $messageBodyDiv);
-
-    addMessageElement($messageDiv, options);
+    addMessageElement($messageDiv);
     console.log('message added? ' + data.username + " " + data.message);
   }
 
@@ -145,9 +144,9 @@ $(function() {
     }
   });
 
-  $inputMessage.click(function () {
-    $inputMessage.focus();
-  });
+  // $inputMessage.click(function () {
+  //   $inputMessage.focus();
+  // });
 
 
   socket.on('new message', function (message) {

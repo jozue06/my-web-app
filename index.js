@@ -23,16 +23,18 @@ server.listen(port, function () {
 
 io.on('connection', function (socket) {
   socket.on('new message', function (data) {
+    console.log(data);
     socket.emit('new message', {
-      // username: socket.username,
-      message: data
+      message: data.message
     });
-    socket.on('add user', function (username){
+    
+    socket.on('add user', function (data){
       socket.emit('add user'), {
         username: username
       };
     });
-    chatHistory.push([data, socket.username]);
+   
+    chatHistory.push(data.message, data.username);
     console.log('message added? ' + data.username + " " + data.message);
   });
 });
