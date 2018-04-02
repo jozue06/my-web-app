@@ -34,10 +34,7 @@
 
 $(function() {
 
-  $.get('/messages').then(messages => {
-    $('#chat').append($('<li>').text(messages));
-    console.log(messages);
-  });
+  
   var FADE_TIME = 150; // ms
   // var COLORS = [
   //   '#e21400', '#91580f', '#f8a700', '#f78b00',
@@ -56,7 +53,11 @@ $(function() {
   var $chatPage = $('.chat.page'); // The chatroom page
 
   $chatPage.show();
-
+  
+  $.get('/messages').then(messages => {
+    $('.messages').append($('<li>').text(messages));
+    console.log(messages);
+  });
   // Sets the client's username
   // function setUsername () {
   //   var username = $usernameInput.val('');
