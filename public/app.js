@@ -51,7 +51,7 @@ $(function() {
   var $usernameInput = $('.userName'); // Input for username
   var $messages = $('.messages'); // Messages area
   var $inputMessage = $('.inputMessage'); // Input message input box
-  var username;
+  // var username;
 
   var $chatPage = $('.chat.page'); // The chatroom page
 
@@ -74,7 +74,7 @@ $(function() {
     message = cleanInput(message);
     var username = $usernameInput.val();
     // This section clears out input fields:
-    console.log(username);
+    // console.log(username);
     $inputMessage.val('');
     $usernameInput.val('');
 
@@ -90,10 +90,10 @@ $(function() {
 
     var $messageBodyDiv = $('<span class="messageBody">').text(data.message);
     var $usernameDiv = $('<span class="username"/>').text(data.username);
-    var $messageDiv = $('<li class="message"/>').data('username', data.username).append($usernameDiv, $messageBodyDiv);
-    socket.emit('add user', data.username);
+    var $messageDiv = $('<li class="message"/>').append($usernameDiv, $messageBodyDiv);
     socket.emit('new message', data.message);
-  
+    socket.emit('add user', data.username);
+   
 
     addMessageElement($messageDiv);
     console.log('message added? ' + data.username + " " + data.message);
@@ -149,11 +149,11 @@ $(function() {
   // });
 
 
-  socket.on('new message', function (message) {
-    addChatMessage(message);
-  });
+  // socket.on('new message', function (message) {
+  //   addChatMessage(data.message);
+  // });
 
-  socket.on('add user', function (username){
-    addChatMessage(username);
-  });
+  // socket.on('add user', function (username){
+  //   addChatMessage(data.username);
+  // });
 });

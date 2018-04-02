@@ -5,7 +5,8 @@ var server = require('http').createServer(app);
 const io = require('socket.io')(server);
 var port = process.env.PORT || 3000;
 
-const chatHistory = [];
+const chatHistory = [
+ ];
 
 app.use(cors());
 app.use(express.json());
@@ -23,18 +24,22 @@ server.listen(port, function () {
 
 io.on('connection', function (socket) {
   socket.on('new message', function (data) {
-    console.log(data);
-    socket.emit('new message', {
-      message: data.message
-    });
     
-    socket.on('add user', function (data){
-      socket.emit('add user'), {
-        username: username
-      };
+    socket.emit('new message', {
+      message: data
     });
-   
-    chatHistory.push(data.message, data.username);
-    console.log('message added? ' + data.username + " " + data.message);
+    console.log('THIS IS THE message FROM THE SERVER ' +data);
+    chatHistory.push({message: data});
   });
+    socket.on('add user', function (data){
+      
+      socket.emit('add user'), {
+        username: data
+      };
+      
+      console.log('THIS IS THE USER FROM THE SERVER ' +data)
+      chatHistory.push({username : data});
+    });  
 });
+
+
