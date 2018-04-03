@@ -7,7 +7,8 @@
     "cors": "^2.8.4",
     "express": "^4.16.3",
     "nodemon": "^1.17.3",
-    "socket.io": "^2.1.0"
+    "socket.io": "^2.1.0",
+    "handlebars": "latest"
   },
   "keywords": [
     "messages"

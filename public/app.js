@@ -4,43 +4,12 @@
 
 
 
-// $(() => {
-  
-// var socket = io();
-//   $('form').submit(() => {
-
-//     socket.on('chat message', function (data) {
-//       // we tell the client to execute 'new message'
-//       socket.broadcast.emit('new message', {
-//         username: socket.username,
-//         message: data
-//       });
-//     });
-//     socket.emit('chat message', $('#mess').val());
-//     socket.emit('usr', $('#usr').val());
-//     return false;
-//   });
-//   socket.on('usr', usr => {
-//     $('#chat').append($('<li>').text(usr));
-//   });
-//   socket.on('chat message', msg => {
-//     $('#chat').append($('<li>').text(msg));
-//   });
-
-
-// });
-
-
 
 $(function() {
 
-  
+
   var FADE_TIME = 150; // ms
-  // var COLORS = [
-  //   '#e21400', '#91580f', '#f8a700', '#f78b00',
-  //   '#58dc00', '#287b00', '#a8f07a', '#4ae8c4',
-  //   '#3b88eb', '#3824aa', '#a700ff', '#d300e7'
-  // ];
+
 
   // Initialize variables
   var socket = io();
@@ -53,20 +22,32 @@ $(function() {
   var $chatPage = $('.chat.page'); // The chatroom page
 
   $chatPage.show();
-  
-  $.get('/messages').then(messages => {
-    $('.messages').append($('<li>').text(messages));
-    console.log(messages);
+
+  $.getJSON('/messages').then(chatHistory => {
+    // console.log('one '+chatHistory.username);
+    
+    // console.log('two '+obj.length);
+    // chatHistory.forEach(function (){
+    let obj = JSON.stringify(chatHistory);
+    $('.messages').append($('<li>').text(obj));
+    // console.log(obj);
+      
   });
-  // Sets the client's username
-  // function setUsername () {
-  //   var username = $usernameInput.val('');
-  // }
 
-  // $currentInput = $inputMessage.focus();
-
-  // Tell the server your username
   
+
+  //   $.getJSON(url)
+  //         .then(books => {
+  //             console.log('Total Books:', books.length);
+
+  //             $('ul').empty();
+
+  //             books.forEach(book => {
+  //                 console.log(book);
+  //                 $('ul').append(bookRender(book));
+  //             });
+  //         });
+  // }
 
 
   // Sends a chat message
@@ -83,21 +64,21 @@ $(function() {
       username: username,
       message: message
     });
-    
-    
-  };
+
+
+  }
 
   function addChatMessage (data) {
 
     var $messageBodyDiv = $('<span class="messageBody">').text(data.message);
     var $usernameDiv = $('<span class="username"/>').text(data.username);
     var $messageDiv = $('<li class="message"/>').append($usernameDiv, $messageBodyDiv);
-    socket.emit('new message', data.message);
-    socket.emit('add user', data.username);
-   
+    socket.emit('new message', data);
+    // socket.emit('add user', data.username);
+
 
     addMessageElement($messageDiv);
-    console.log('message added? ' + data.username + " " + data.message);
+    console.log('message added? ' + data.username + ' ' + data.message);
   }
 
   // Adds a message element to the messages and scrolls to the bottom
