@@ -29,7 +29,6 @@ io.on('connection', function (socket) {
       message: data.message,
       username: data.username
     });
-    console.log('message received ', data);
     let bo = JSON.stringify(data);
     chatHistory.push(bo);
   });

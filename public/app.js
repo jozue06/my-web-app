@@ -1,12 +1,5 @@
 'use strict';
 
-// const template = $('template').text();
-// const render = Handlebars.compile(template);
-
-
-
-
-
 $(function() {
 
 
@@ -19,21 +12,15 @@ $(function() {
   var $usernameInput = $('.userName'); // Input for username
   var $messages = $('.messages'); // Messages area
   var $inputMessage = $('.inputMessage'); // Input message input box
-  // var username;
+
 
   var $chatPage = $('.chat.page'); // The chatroom page
 
   $chatPage.show();
 
   $.get('/messages').then(chatHistory => {
-
     let obj = JSON.stringify(chatHistory);
-    // console.log('one '+ obj);
-    // JSON.parse(obj);
-    // console.log('two '+obj);
-    $('.messages').append($('<li>').text(JSON.parse(obj)));
-    // console.log(obj);
-      
+    $('.messages').append($('<li>').text(JSON.parse(obj)));      
   });
 
 
@@ -43,7 +30,6 @@ $(function() {
     message = cleanInput(message);
     var username = $usernameInput.val();
     // This section clears out input fields:
-    // console.log(username);
     $inputMessage.val('');
     $usernameInput.val('');
     addChatMessage({
@@ -55,24 +41,15 @@ $(function() {
   }
 
   function addChatMessage (data) {
-
     var $messageBodyDiv = $('<span class="messageBody">').text(data.message);
     var $usernameDiv = $('<span class="username"/>').text(data.username);
     var $messageDiv = $('<li class="message"/>').append($usernameDiv, $messageBodyDiv);
-    // socket.emit('add user', data.username)
     addMessageElement($messageDiv);
-    // console.log('message added? ' + data.username + ' ' + data.message);
   }
-  
-  
-  // Adds a message element to the messages and scrolls to the bottom
-  // el - The element to add as a message
-  // options.fade - If the element should fade-in (default = true)
-  // options.prepend - If the element should prepend
-  //   all other messages (default = false)
+
+  // Adds a message element to the messages
   function addMessageElement (el, options) {
     var $el = $(el);
-
     // Setup default options
     if (!options) {
       options = {};
@@ -83,7 +60,6 @@ $(function() {
     if (typeof options.prepend === 'undefined') {
       options.prepend = false;
     }
-
     // Apply options
     if (options.fade) {
       $el.hide().fadeIn(FADE_TIME);
@@ -101,26 +77,15 @@ $(function() {
     return $('<div/>').text(input).html();
   }
 
-
+  // The 'Enter' event handler
   $window.keydown(function (event) {
-
     if (event.which === 13) {
       sendMessage();
-      // setUsername();
     }
-    
+
   });
-
-  // $inputMessage.click(function () {
-  //   $inputMessage.focus();
-  // });
-
   socket.on('new message', function (data) {
     addChatMessage(data);
     console.log('stuff from socekt on in client ' + data);
   });
-
-  // socket.on('add user', function (username){
-  //   addChatMessage(username);
-  // });
 });
