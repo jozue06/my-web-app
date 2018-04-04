@@ -25,10 +25,10 @@ $(function() {
 
   $chatPage.show();
 
-  $.getJSON('/messages').then(chatHistory => {
+  $.get('/messages').then(chatHistory => {
 
     let obj = JSON.stringify(chatHistory);
-    console.log('one '+ obj);
+    // console.log('one '+ obj);
     // JSON.parse(obj);
     // console.log('two '+obj);
     $('.messages').append($('<li>').text(JSON.parse(obj)));
@@ -46,13 +46,11 @@ $(function() {
     // console.log(username);
     $inputMessage.val('');
     $usernameInput.val('');
-
     addChatMessage({
       username: username,
       message: message
     });
-
-
+    socket.emit('new message', message);
   }
 
   function addChatMessage (data) {
@@ -60,14 +58,12 @@ $(function() {
     var $messageBodyDiv = $('<span class="messageBody">').text(data.message);
     var $usernameDiv = $('<span class="username"/>').text(data.username);
     var $messageDiv = $('<li class="message"/>').append($usernameDiv, $messageBodyDiv);
-    socket.emit('new message', data);
-    // socket.emit('add user', data.username);
-
-
+    // socket.emit('add user', data.username)
     addMessageElement($messageDiv);
     // console.log('message added? ' + data.username + ' ' + data.message);
   }
-
+  
+  
   // Adds a message element to the messages and scrolls to the bottom
   // el - The element to add as a message
   // options.fade - If the element should fade-in (default = true)
@@ -111,15 +107,16 @@ $(function() {
       sendMessage();
       // setUsername();
     }
+    
   });
 
   // $inputMessage.click(function () {
   //   $inputMessage.focus();
   // });
 
-
   socket.on('new message', function (data) {
     addChatMessage(data);
+    console.log('stuff from socekt on in client ' + data);
   });
 
   // socket.on('add user', function (username){

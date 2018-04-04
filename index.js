@@ -11,17 +11,11 @@ const chatHistory = [];
 
 app.use(cors());
 app.use(express.json());
-// app.use(express.urlencoded({ extended:true}));
+app.use(express.urlencoded({ extended:true}));
 
-app.get('/messages', express.urlencoded({ extended:true}), (req, res) => {
+app.get('/messages', (req, res) => {
   res.send(chatHistory);
 });
-
-
-// GET, POST, PUT, DELETE
-
-// CRUD  create, read, update, delete
-
 app.use(express.static('public'));
 
 server.listen(port, function () {
@@ -30,32 +24,15 @@ server.listen(port, function () {
 
 io.on('connection', function (socket) {
   socket.on('new message', function (data) {
-    console.log('stuff how many times?');
+    console.log('message received ', data);
     socket.broadcast.emit('new message', {
       message: data,
       username: data
     });
-
-    // console.log('THIS IS THE INFO FROM THE SERVER ' + data);
-    JSON.stringify(data);
-    // let username = 
-    // let message = data.message;
-    let bojack = JSON.stringify({username: data.username, message: data.message});
-    chatHistory.push(bojack);
-
-    // console.log(chatHistory);
+    let bo = JSON.stringify(data);
+    chatHistory.push(bo);
   });
 
-  // console.log('2' +chatHistory);
-  // socket.on('add user', function (data){
-
-  //   socket.emit('add user'), {
-
-  //   };
-
-  //   console.log('THIS IS THE USER FROM THE SERVER ' +data);
-  //   chatHistory.push({username : data});
-  // });
 });
 
 
