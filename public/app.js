@@ -1,3 +1,5 @@
+'use strict';
+
 // const template = $('template').text();
 // const render = Handlebars.compile(template);
 
@@ -24,30 +26,15 @@ $(function() {
   $chatPage.show();
 
   $.getJSON('/messages').then(chatHistory => {
-    // console.log('one '+chatHistory.username);
-    
-    // console.log('two '+obj.length);
-    // chatHistory.forEach(function (){
+
     let obj = JSON.stringify(chatHistory);
-    $('.messages').append($('<li>').text(obj));
+    console.log('one '+ obj);
+    // JSON.parse(obj);
+    // console.log('two '+obj);
+    $('.messages').append($('<li>').text(JSON.parse(obj)));
     // console.log(obj);
       
   });
-
-  
-
-  //   $.getJSON(url)
-  //         .then(books => {
-  //             console.log('Total Books:', books.length);
-
-  //             $('ul').empty();
-
-  //             books.forEach(book => {
-  //                 console.log(book);
-  //                 $('ul').append(bookRender(book));
-  //             });
-  //         });
-  // }
 
 
   // Sends a chat message
@@ -78,7 +65,7 @@ $(function() {
 
 
     addMessageElement($messageDiv);
-    console.log('message added? ' + data.username + ' ' + data.message);
+    // console.log('message added? ' + data.username + ' ' + data.message);
   }
 
   // Adds a message element to the messages and scrolls to the bottom
@@ -131,11 +118,11 @@ $(function() {
   // });
 
 
-  // socket.on('new message', function (message) {
-  //   addChatMessage(data.message);
-  // });
+  socket.on('new message', function (data) {
+    addChatMessage(data);
+  });
 
   // socket.on('add user', function (username){
-  //   addChatMessage(data.username);
+  //   addChatMessage(username);
   // });
 });
