@@ -29,8 +29,11 @@ io.on('connection', function (socket) {
       message: data.message,
       username: data.username
     });
-    let bo = JSON.stringify(data);
-    chatHistory.push(bo);
+    console.log('Username is ' + data.username + ' and the message is ' + data.message);
+    // let bo = JSON.stringify(data);
+    chatHistory.push(data.username, data.message);
+   
+
   });
 
 });

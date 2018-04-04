@@ -2,9 +2,7 @@
 
 $(function() {
 
-
   var FADE_TIME = 150; // ms
-
 
   // Initialize variables
   var socket = io();
@@ -13,16 +11,20 @@ $(function() {
   var $messages = $('.messages'); // Messages area
   var $inputMessage = $('.inputMessage'); // Input message input box
 
-
   var $chatPage = $('.chat.page'); // The chatroom page
 
   $chatPage.show();
 
-  $.get('/messages').then(chatHistory => {
+  $.getJSON('/messages').then(chatHistory => {
     let obj = JSON.stringify(chatHistory);
-    $('.messages').append($('<li>').text(JSON.parse(obj)));      
+    let data = JSON.parse(obj);
+    $.each(data, function( key, value ) {
+      let $value = value;
+      let $key = key;
+      console.log( 'key is :' + $key + ' value is : ' + $value );
+      $('.history').append($('<li>').text($value));
+    });
   });
-
 
   // Sends a chat message
   function sendMessage () {
