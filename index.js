@@ -24,11 +24,12 @@ server.listen(port, function () {
 
 io.on('connection', function (socket) {
   socket.on('new message', function (data) {
-    console.log('message received ', data);
+    
     socket.broadcast.emit('new message', {
-      message: data,
-      username: data
+      message: data.message,
+      username: data.username
     });
+    console.log('message received ', data);
     let bo = JSON.stringify(data);
     chatHistory.push(bo);
   });

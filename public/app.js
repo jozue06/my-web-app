@@ -50,7 +50,8 @@ $(function() {
       username: username,
       message: message
     });
-    socket.emit('new message', message);
+    let data = {username,message};
+    socket.emit('new message', data);
   }
 
   function addChatMessage (data) {
