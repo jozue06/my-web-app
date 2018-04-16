@@ -36,7 +36,7 @@ $(function() {
     $usernameInput.val('');
     addChatMessage({
       username: username,
-      message: message
+      message: message,
     });
     let data = {username,message};
     socket.emit('new message', data);

@@ -31,7 +31,7 @@ io.on('connection', function (socket) {
     });
     console.log('Username is ' + data.username + ' and the message is ' + data.message);
     // let bo = JSON.stringify(data);
-    chatHistory.push(data.username, data.message);
+    chatHistory.push(data.username,data.message);
    
 
   });
