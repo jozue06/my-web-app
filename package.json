@@ -1,5 +1,5 @@
 {
-  "name": "realtime-chat",
+  "name": "blankFace",
   "scripts": {
     "start": "node index"
   },
@@ -12,6 +12,6 @@
   "keywords": [
     "messages"
   ],
-  "author": "Josh McClung",
+  "author": "@Jm6",
   "license": "ISC"
 }
