@@ -19,7 +19,6 @@ app.get('/messages', (req, res) => {
 app.use(express.static('public'));
 
 server.listen(port, function () {
-  console.log('Server listening at port %d', port);
 });
 
 io.on('connection', function (socket) {
@@ -29,8 +28,7 @@ io.on('connection', function (socket) {
       message: data.message,
       username: data.username
     });
-    let bo = JSON.stringify(data);
-    chatHistory.push(bo);
+    chatHistory.push(data);
   });
 
 });

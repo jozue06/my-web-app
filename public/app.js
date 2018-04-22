@@ -2,9 +2,7 @@
 
 $(function() {
 
-
-  var FADE_TIME = 150; // ms
-
+  var FADE_TIME = 250; // ms
 
   // Initialize variables
   var socket = io();
@@ -13,16 +11,16 @@ $(function() {
   var $messages = $('.messages'); // Messages area
   var $inputMessage = $('.inputMessage'); // Input message input box
 
-
   var $chatPage = $('.chat.page'); // The chatroom page
 
   $chatPage.show();
 
   $.get('/messages').then(chatHistory => {
-    let obj = JSON.stringify(chatHistory);
-    $('.messages').append($('<li>').text(JSON.parse(obj)));      
+    let formHis = chatHistory.map(history => {
+      return `<strong>${history.username}</strong> ${history.message}`;
+    });
+    formHis.forEach(msg => $('.messages').append($('<li>').html(msg)));
   });
-
 
   // Sends a chat message
   function sendMessage () {
@@ -31,7 +29,6 @@ $(function() {
     var username = $usernameInput.val();
     // This section clears out input fields:
     $inputMessage.val('');
-    $usernameInput.val('');
     addChatMessage({
       username: username,
       message: message
@@ -71,7 +68,6 @@ $(function() {
     }
     $messages[0].scrollTop = $messages[0].scrollHeight;
   }
-
   // Prevents input from having injected markup
   function cleanInput (input) {
     return $('<div/>').text(input).html();
@@ -82,10 +78,8 @@ $(function() {
     if (event.which === 13) {
       sendMessage();
     }
-
   });
   socket.on('new message', function (data) {
     addChatMessage(data);
-    console.log('stuff from socekt on in client ' + data);
   });
 });
