@@ -1,5 +1,6 @@
 'use strict';
 
+
 $(function() {
 
   var FADE_TIME = 250; // ms
