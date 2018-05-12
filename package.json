@@ -4,10 +4,13 @@
     "start": "node index"
   },
   "dependencies": {
+    "@pusher/push-notifications-server": "^0.10.3",
     "cors": "^2.8.4",
     "express": "^4.16.3",
-    "nodemon": "^1.17.3",
-    "socket.io": "^2.1.0"
+    "nodemon": "^1.17.4",
+    "socket.io": "^2.1.0",
+    "sshpk": "^1.14.1",
+    "tough-cookie": "^2.3.4"
   },
   "keywords": [
     "messages"
