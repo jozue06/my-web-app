@@ -1,11 +1,13 @@
 {
   "name": "blankFace",
+  "main": "./resources/app/index.js",
   "scripts": {
-    "start": "node index"
+    "start":"electron ."
   },
   "dependencies": {
     "@pusher/push-notifications-server": "^0.10.3",
     "cors": "^2.8.4",
+    "electron": "^2.0.4",
     "express": "^4.16.3",
     "nodemon": "^1.17.4",
     "pusher-js": "^4.2.2",
