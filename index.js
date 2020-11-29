@@ -17,7 +17,9 @@ app.use(express.urlencoded({ extended:true}));
 
 
 app.get('/messages', (req, res) => {
-  res.send(chatHistory);
+  let bod = {messages: chatHistory}
+  console.log("het bod", JSON.stringify(bod));
+  res.send(JSON.stringify(bod));
 });
 app.use(express.static('public'));
 
@@ -33,23 +35,23 @@ io.on('connection', function (socket) {
     });
     chatHistory.push(data);
     
-    pushNotifications.publish(['hello'], {
-      apns: {
-        aps: {
-          alert: 'Hello!'
-        }
-      },
-      fcm: {
-        notification: {
-          title: 'Hello',
-          body: 'Hello, world!'
-        }
-      }
-    }).then((publishResponse) => {
-      console.log('Just published:', publishResponse.publishId);
-    }).catch((error) => {
-      console.log('Error:', error);
-    });
+  //   pushNotifications.publish(['hello'], {
+  //     apns: {
+  //       aps: {
+  //         alert: 'Hello!'
+  //       }
+  //     },
+  //     fcm: {
+  //       notification: {
+  //         title: 'Hello',
+  //         body: 'Hello, world!'
+  //       }
+  //     }
+  //   }).then((publishResponse) => {
+  //     console.log('Just published:', publishResponse.publishId);
+  //   }).catch((error) => {
+  //     console.log('Error:', error);
+  //   });
   });
 
 });
