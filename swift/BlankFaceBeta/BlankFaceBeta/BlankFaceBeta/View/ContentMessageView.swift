@@ -1,9 +1,5 @@
 //
 //  ContentMessageView.swift
-//  ChatViewTutorial
-//
-//  Created by Duy Bui on 2/2/20.
-//  Copyright © 2020 Duy Bui. All rights reserved.
 //
 
 import SwiftUI
@@ -11,7 +7,6 @@ import SwiftUI
 struct ContentMessageView: View {
     var username: String
     var contentMessage: String
-//    var isCurrentUser: Bool
     
     var body: some View {
         HStack {
@@ -20,10 +15,6 @@ struct ContentMessageView: View {
                     Text(username)
                         .fontWeight(.bold)
                         .font(.system(size: 12))
-
-                    Text(contentMessage)
-                        .font(.system(size: 10))
-                        .opacity(0.7)
                 }
 
                 Text(contentMessage)
@@ -33,9 +24,6 @@ struct ContentMessageView: View {
             .background(Color.blue)
             .cornerRadius(10)
 
-//                    if !isUser {
-//                        Spacer()
-//                    }
         }
         .transition(.scale(scale: 0, anchor: .topLeading))
     }

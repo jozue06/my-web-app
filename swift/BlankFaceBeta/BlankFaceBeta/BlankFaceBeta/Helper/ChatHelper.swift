@@ -10,7 +10,7 @@ import SwiftUI
 class ChatHelper : ObservableObject {
     var didChange = PassthroughSubject<Void, Never>()
     @Published var realTimeMessages = Messages.messages
-    private let serverURL = "http://localhost:3001/messages" // webservice URL with port
+    private let serverURL = "https://blank-face-beta.herokuapp.com/messages" // webservice URL with port
     var manager: SocketManager?
     var socket: SocketIOClient?
     func addMessage(chatMessage: Message) {

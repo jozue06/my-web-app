@@ -15,10 +15,8 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended:true}));
 
-
 app.get('/messages', (req, res) => {
   let bod = {messages: chatHistory}
-  console.log("het bod", JSON.stringify(bod)); 
   res.send(JSON.stringify(bod));
 });
 app.use(express.static('public'));
@@ -31,8 +29,6 @@ io.on('connection', function (socket) {
   socket.on('new message', function (data) {
 
     let body = JSON.stringify(data);
-    console.log('got a new request', body);
-    
     socket.broadcast.emit('new message', body);
     chatHistory.push(data); 
     

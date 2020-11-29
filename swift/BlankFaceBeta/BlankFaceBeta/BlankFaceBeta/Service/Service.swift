@@ -13,7 +13,7 @@ class Service {
     static let shared = Service() // singleton
     
     func loadHistoryFromServer(completion: @escaping ([DecodableMessage], Error?) -> Void) {
-        let urlString = "http://localhost:3001/messages"
+        let urlString = "https://blank-face-beta.herokuapp.com/messages"
          guard let url = URL(string: urlString) else {return}
        
         URLSession.shared.dataTask(with: url) { (data, _, err) in
