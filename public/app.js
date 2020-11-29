@@ -17,7 +17,7 @@ $(function() {
   $chatPage.show();
 
   $.get('/messages').then(chatHistory => {
-    let formHis = chatHistory.map(history => {
+    let formHis = JSON.parse(chatHistory).map(history => {
       return `<strong>${history.username}</strong> ${history.message}`;
     });
     formHis.forEach(msg => $('.messages').append($('<li>').html(msg)));

@@ -8,7 +8,16 @@
 
 import Foundation
 
-struct Message: Decodable {
+struct Message: Hashable, Encodable {
     let username: String
     let message: String
+}
+
+struct DecodableMessage: Decodable {
+    let username: String
+    let message: String
+}
+
+struct Messages {
+    static let messages = [Message]()
 }

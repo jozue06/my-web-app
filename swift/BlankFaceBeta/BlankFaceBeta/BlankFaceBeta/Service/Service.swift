@@ -12,7 +12,7 @@ class Service {
     
     static let shared = Service() // singleton
     
-    func getMessagesFromServer(completion: @escaping ([Message], Error?) -> Void) {
+    func loadHistoryFromServer(completion: @escaping ([DecodableMessage], Error?) -> Void) {
         let urlString = "http://localhost:3001/messages"
          guard let url = URL(string: urlString) else {return}
        
