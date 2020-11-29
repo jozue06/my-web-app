@@ -10,5 +10,5 @@ import Foundation
 
 struct ServiceResult: Decodable {
     // necessary result items captured in the service result
-    let messages: [Message]
+    let messages: [DecodableMessage]
 }

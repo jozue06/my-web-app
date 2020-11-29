@@ -13,7 +13,6 @@ class ChatHelper : ObservableObject {
     private let serverURL = "https://blank-face-beta.herokuapp.com/messages" // webservice URL with port
     var manager: SocketManager?
     var socket: SocketIOClient?
-    func addMessage(chatMessage: Message) {
         let json = [
             "username": chatMessage.username,
             "message": chatMessage.message
