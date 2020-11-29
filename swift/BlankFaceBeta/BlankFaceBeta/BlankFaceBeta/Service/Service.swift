@@ -27,7 +27,6 @@ class Service {
             
         do {
             let serviceResult = try JSONDecoder().decode(ServiceResult.self, from: data)
-            print(" :::::::: G E T T I N G :::::::::::serviceResult.messages ", serviceResult.messages)
             completion(serviceResult.messages, nil)
         } catch let jsonErr {
             print("Failed to decode json:", jsonErr)
