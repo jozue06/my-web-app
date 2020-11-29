@@ -16,8 +16,8 @@ $(function() {
 
   $chatPage.show();
 
-  $.get('/messages').then(chatHistory => {
-    let formHis = chatHistory.map(history => {
+  $.get('/messages').then(chatHistory => {    
+    let formHis =  JSON.parse(chatHistory).messages.map(history => {
       return `<strong>${history.username}</strong> ${history.message}`;
     });
     formHis.forEach(msg => $('.messages').append($('<li>').html(msg)));
@@ -30,7 +30,7 @@ $(function() {
     var username = $usernameInput.val();
     // This section clears out input fields:
     $inputMessage.val('');
-    addChatMessage({
+    addNewChatMessage({
       username: username,
       message: message
     });
@@ -39,6 +39,14 @@ $(function() {
   }
 
   function addChatMessage (data) {
+    let messageData = JSON.parse(data);
+    var $messageBodyDiv = $('<span class="messageBody">').text(messageData.message);
+    var $usernameDiv = $('<span class="username"/>').text(messageData.username);
+    var $messageDiv = $('<li class="message"/>').append($usernameDiv, $messageBodyDiv);
+    addMessageElement($messageDiv);
+  }
+
+  function addNewChatMessage (data) {
     var $messageBodyDiv = $('<span class="messageBody">').text(data.message);
     var $usernameDiv = $('<span class="username"/>').text(data.username);
     var $messageDiv = $('<li class="message"/>').append($usernameDiv, $messageBodyDiv);
@@ -80,7 +88,7 @@ $(function() {
       sendMessage();
     }
   });
-  socket.on('new message', function (data) {
+  socket.on('new message', function (data) {    
     addChatMessage(data);
   });
 });

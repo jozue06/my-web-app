@@ -15,10 +15,8 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended:true}));
 
-
 app.get('/messages', (req, res) => {
   let bod = {messages: chatHistory}
-  console.log("het bod", JSON.stringify(bod));
   res.send(JSON.stringify(bod));
 });
 app.use(express.static('public'));
@@ -27,13 +25,12 @@ server.listen(port, function () {
 });
 
 io.on('connection', function (socket) {
+
   socket.on('new message', function (data) {
-    
-    socket.broadcast.emit('new message', {
-      message: data.message,
-      username: data.username
-    });
-    chatHistory.push(data);
+
+    let body = JSON.stringify(data);
+    socket.broadcast.emit('new message', body);
+    chatHistory.push(data); 
     
   //   pushNotifications.publish(['hello'], {
   //     apns: {
