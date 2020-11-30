@@ -3,9 +3,10 @@
 
 $(function() {
 
-  var FADE_TIME = 250; // ms
-
   // Initialize variables
+  var FADE_TIME = 250; // ms
+  
+  
   var socket = io();
   var $window = $(window);
   var $usernameInput = $('.userName'); // Input for username
@@ -15,7 +16,10 @@ $(function() {
   var $chatPage = $('.chat.page'); // The chatroom page
 
   $chatPage.show();
-
+  $chatPage.on("click", () => {
+    Notification.requestPermission();
+  });
+  
   $.get('/messages').then(chatHistory => {    
     let formHis =  JSON.parse(chatHistory).messages.map(history => {
       return `<strong>${history.username}</strong> ${history.message}`;
@@ -44,6 +48,8 @@ $(function() {
     var $usernameDiv = $('<span class="username"/>').text(messageData.username);
     var $messageDiv = $('<li class="message"/>').append($usernameDiv, $messageBodyDiv);
     addMessageElement($messageDiv);
+    playSound();
+    showNotification(data);
   }
 
   function addNewChatMessage (data) {
@@ -76,6 +82,26 @@ $(function() {
       $messages.append($el);
     }
     $messages[0].scrollTop = $messages[0].scrollHeight;
+    
+  }
+
+  function playSound() {    
+    let url = "./audio/noti.mp3";
+    const soundEffect = new Audio(url);
+    soundEffect.play();    
+  }
+
+  function showNotification(data) {
+    Notification.requestPermission();
+    if(!('permission' in Notification)) {
+      Notification.permission = permission;
+    }
+
+    if (window.Notification && Notification.permission === "granted") {
+      let parsedData = JSON.parse(data);
+      let bodyText = `New Message from ${parsedData.username}: \' ${parsedData.message} \'`;
+      new Notification('New Message', { body: bodyText});
+    }
   }
   // Prevents input from having injected markup
   function cleanInput (input) {
