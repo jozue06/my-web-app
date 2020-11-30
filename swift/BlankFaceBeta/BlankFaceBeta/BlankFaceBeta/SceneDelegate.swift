@@ -39,17 +39,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Release any resources associated with this scene that can be re-created the next time the scene connects.
         // The scene may re-connect later, as its session was not neccessarily discarded (see `application:didDiscardSceneSessions` instead).
     }
-
-    func sceneDidBecomeActive(_ scene: UIScene) {
-        
-        // Called when the scene has moved from an inactive state to an active state.
-        // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
-    }
-
-    func sceneWillResignActive(_ scene: UIScene) {
-        // Called when the scene will move from an active state to an inactive state.
-        // This may occur due to temporary interruptions (ex. an incoming phone call).
-    }
+//
+//    func sceneDidBecomeActive(_ scene: UIScene) {
+//
+//        // Called when the scene has moved from an inactive state to an active state.
+//        // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
+//    }
+//
+//    func sceneWillResignActive(_ scene: UIScene) {
+//        // Called when the scene will move from an active state to an inactive state.
+//        // This may occur due to temporary interruptions (ex. an incoming phone call).
+//    }
 
     func sceneWillEnterForeground(_ scene: UIScene) {
         
@@ -63,6 +63,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
     }
 
+    var backgroundUpdateTask: UIBackgroundTaskIdentifier = UIBackgroundTaskIdentifier(rawValue: 0)
+
+    func sceneDidBecomeActive(_ scene: UIScene) {
+        self.endBackgroundUpdateTask()
+    }
+
+    func sceneWillResignActive(_ scene: UIScene) {
+        self.backgroundUpdateTask = UIApplication.shared.beginBackgroundTask(expirationHandler: {
+          self.endBackgroundUpdateTask()
+        })
+    }
+
+    func endBackgroundUpdateTask() {
+        UIApplication.shared.endBackgroundTask(self.backgroundUpdateTask)
+        self.backgroundUpdateTask = UIBackgroundTaskIdentifier.invalid
+    }
 
 }
 

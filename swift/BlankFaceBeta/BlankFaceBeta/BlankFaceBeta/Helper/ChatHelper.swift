@@ -6,6 +6,7 @@ import Foundation
 import UIKit
 import SocketIO
 import SwiftUI
+import AVFoundation
 
 class ChatHelper : ObservableObject {
     var didChange = PassthroughSubject<Void, Never>()
@@ -22,6 +23,7 @@ class ChatHelper : ObservableObject {
         ]
         socket?.emit("new message", json)
         DispatchQueue.main.async {
+            AudioServicesPlayAlertSound(1004)
             self.realTimeMessages.append(chatMessage)
         }
         
@@ -44,8 +46,11 @@ class ChatHelper : ObservableObject {
         do {
             
             let serviceResult = try JSONDecoder().decode(DecodableMessage.self, from: jsonData)
+            
             DispatchQueue.main.async {
-               self.realTimeMessages.append(Message(username: serviceResult.username, message: serviceResult.message))
+                AudioServicesPlayAlertSound(1023)
+                AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+                self.realTimeMessages.append(Message(username: serviceResult.username, message: serviceResult.message))
            }
             
         } catch let jsonErr {
