@@ -26,8 +26,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
             window.rootViewController = UIHostingController(rootView: chatView.environmentObject(chatHelper))
-            chatHelper.setSockets()
-            chatHelper.getMessages()
             self.window = window
             window.makeKeyAndVisible()
         }
@@ -42,6 +40,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func sceneWillEnterForeground(_ scene: UIScene) {
         chatHelper.setSockets()
+        chatHelper.getMessages()
         // Called as the scene transitions from the background to the foreground.
         // Use this method to undo the changes made on entering the background.
     }
