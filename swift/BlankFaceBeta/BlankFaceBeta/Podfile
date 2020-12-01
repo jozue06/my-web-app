@@ -6,5 +6,6 @@ target 'BlankFaceBeta' do
   use_frameworks!
 
   # Pods for BlankFaceBeta
-	pod 'Socket.IO-Client-Swift'
+  pod 'Socket.IO-Client-Swift'
+  pod 'PushNotifications'
 end

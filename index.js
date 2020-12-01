@@ -7,7 +7,6 @@ var server = require('http').createServer(app);
 const io = require('socket.io')(server);
 var port = process.env.PORT || 3001;
 const PushNotifications = require('@pusher/push-notifications-server');
-const Pusher = require('pusher-js');
 
 const chatHistory = [];
 
@@ -32,30 +31,28 @@ io.on('connection', function (socket) {
     socket.broadcast.emit('new message', body);
     chatHistory.push(data); 
     
-  //   pushNotifications.publish(['hello'], {
-  //     apns: {
-  //       aps: {
-  //         alert: 'Hello!'
-  //       }
-  //     },
-  //     fcm: {
-  //       notification: {
-  //         title: 'Hello',
-  //         body: 'Hello, world!'
-  //       }
-  //     }
-  //   }).then((publishResponse) => {
-  //     console.log('Just published:', publishResponse.publishId);
-  //   }).catch((error) => {
-  //     console.log('Error:', error);
-  //   });
+    pushNotifications.publish(['hello'], {
+      apns: {
+        aps: {
+          alert: 
+            {
+              title: `New Message from ${data.username}`,             
+            },
+            sound: "default",
+            badge: 1,
+        },
+       
+      },
+    }).then((publishResponse) => {
+      console.log('Just published:', publishResponse.publishId);
+    }).catch((error) => {
+      console.log('Error:', error);
+    });
   });
 
 });
 
 let pushNotifications = new PushNotifications({
-  instanceId: '46829646-f042-4165-a958-0fd574fb78ba',
-  secretKey: '289F0CF96B40E84545E04FBF05B225D'
+  instanceId: '8ec96bf1-49fe-40ee-820c-e8df3d29add4',
+  secretKey: '57C367123BCABC5D3F8C78F61AA98299C64B86E4364CA90E475645654C65E52C'
 });
-
-

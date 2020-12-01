@@ -1,20 +1,24 @@
 PODS:
+  - PushNotifications (3.0.4)
   - Socket.IO-Client-Swift (15.2.0):
     - Starscream (~> 3.1)
   - Starscream (3.1.1)
 
 DEPENDENCIES:
+  - PushNotifications
   - Socket.IO-Client-Swift
 
 SPEC REPOS:
   trunk:
+    - PushNotifications
     - Socket.IO-Client-Swift
     - Starscream
 
 SPEC CHECKSUMS:
+  PushNotifications: 6e3d148e5e129af9d4a9279b288c934f9a7f9066
   Socket.IO-Client-Swift: 1e3e3a1f09f3312a167f0d781eb2f383d477357c
   Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
 
-PODFILE CHECKSUM: 0a2281f289d2808f5bd671ff4e272239e5d28619
+PODFILE CHECKSUM: 47236a5a45517f885c6e43e2536ef5098682394b
 
 COCOAPODS: 1.10.0
