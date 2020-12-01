@@ -406,7 +406,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = BlankFaceBeta/BlankFaceBetaDebug.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"BlankFaceBeta/Preview Content\"";
+				CURRENT_PROJECT_VERSION = 1.01;
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 9T2H6FY483;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = BlankFaceBeta/Info.plist;
@@ -414,10 +415,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.04;
 				PRODUCT_BUNDLE_IDENTIFIER = BlankFaceBeta;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -427,7 +429,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"BlankFaceBeta/Preview Content\"";
+				CURRENT_PROJECT_VERSION = 1.01;
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 9T2H6FY483;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = BlankFaceBeta/Info.plist;
@@ -435,10 +438,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.04;
 				PRODUCT_BUNDLE_IDENTIFIER = BlankFaceBeta;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
