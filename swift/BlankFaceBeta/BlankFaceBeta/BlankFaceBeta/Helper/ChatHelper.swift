@@ -24,7 +24,7 @@ class ChatHelper : ObservableObject {
         socket?.emit("new message", json)
         DispatchQueue.main.async {
             AudioServicesPlayAlertSound(1004)
-            self.realTimeMessages.append(chatMessage)
+            self.realTimeMessages.insert(chatMessage, at:0)
         }
         
         didChange.send(())
@@ -36,7 +36,7 @@ class ChatHelper : ObservableObject {
             if err != nil {print(String(describing: err)); return} // an error is received print error to log and stop
             DispatchQueue.main.async {
                 for item in res {
-                    self.realTimeMessages.append(Message(username: item.username, message: item.message))
+                    self.realTimeMessages.insert(Message(username: item.username, message: item.message), at: 0)
                 }
             }
         }
@@ -50,7 +50,7 @@ class ChatHelper : ObservableObject {
                 for item in res {
                     let newMessage = Message(username: item.username, message: item.message);
                     if (!self.realTimeMessages.contains(newMessage)) {
-                        self.realTimeMessages.append(newMessage)
+                        self.realTimeMessages.insert(newMessage, at: 0)
                     }
                 }
             }
@@ -66,7 +66,7 @@ class ChatHelper : ObservableObject {
             DispatchQueue.main.async {
                 AudioServicesPlayAlertSound(1023)
                 AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
-                self.realTimeMessages.append(Message(username: serviceResult.username, message: serviceResult.message))
+                self.realTimeMessages.insert(Message(username: serviceResult.username, message: serviceResult.message), at: 0)
            }
             
         } catch let jsonErr {

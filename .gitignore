@@ -69,3 +69,5 @@ node_modules
 # End of https://www.gitignore.io/api/macos,linux,windows
 *.xcuserstate
 swift/BlankFaceBeta/BlankFaceBeta/BlankFaceBeta.xcworkspace/xcuserdata/joshuamcclung.xcuserdatad/UserInterfaceState.xcuserstate
+*.xcbkptlist
+*.xcuserstate
