@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		841595402577602A00879C40 /* aps.cer in Resources */ = {isa = PBXBuildFile; fileRef = 8415953F2577602A00879C40 /* aps.cer */; };
 		8431936525732C00007F600A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431936425732C00007F600A /* AppDelegate.swift */; };
 		8431936725732C00007F600A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8431936625732C00007F600A /* SceneDelegate.swift */; };
 		8431936B25732C01007F600A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8431936A25732C01007F600A /* Assets.xcassets */; };
@@ -23,6 +24,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8415953D25775E2900879C40 /* BlankFaceBetaRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BlankFaceBetaRelease.entitlements; sourceTree = "<group>"; };
+		8415953F2577602A00879C40 /* aps.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = aps.cer; sourceTree = "<group>"; };
 		8431936125732C00007F600A /* BlankFaceBeta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlankFaceBeta.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8431936425732C00007F600A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8431936625732C00007F600A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -76,6 +79,8 @@
 		8431936325732C00007F600A /* BlankFaceBeta */ = {
 			isa = PBXGroup;
 			children = (
+				8415953D25775E2900879C40 /* BlankFaceBetaRelease.entitlements */,
+				8415953F2577602A00879C40 /* aps.cer */,
 				8493A0662575A845001A1353 /* BlankFaceBetaDebug.entitlements */,
 				8482C1C1257364DA002A4639 /* Helper */,
 				8482C1BA25736462002A4639 /* View */,
@@ -211,6 +216,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				841595402577602A00879C40 /* aps.cer in Resources */,
 				8431936E25732C01007F600A /* Preview Assets.xcassets in Resources */,
 				8431936B25732C01007F600A /* Assets.xcassets in Resources */,
 			);
@@ -401,8 +407,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = BlankFaceBeta/BlankFaceBetaDebug.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.01;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1.03;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 9T2H6FY483;
 				ENABLE_PREVIEWS = NO;
@@ -411,9 +418,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.04;
+				MARKETING_VERSION = 1.0.05;
 				PRODUCT_BUNDLE_IDENTIFIER = BlankFaceBeta;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = Distro;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -424,8 +432,10 @@
 			baseConfigurationReference = 97FAFD575EC398D773521D8E /* Pods-BlankFaceBeta.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.01;
+				CODE_SIGN_ENTITLEMENTS = BlankFaceBeta/BlankFaceBetaRelease.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1.03;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 9T2H6FY483;
 				ENABLE_PREVIEWS = NO;
@@ -434,9 +444,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.04;
+				MARKETING_VERSION = 1.0.05;
 				PRODUCT_BUNDLE_IDENTIFIER = BlankFaceBeta;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = Distro;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
