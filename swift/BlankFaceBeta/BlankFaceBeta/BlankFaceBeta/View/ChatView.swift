@@ -15,29 +15,29 @@ struct ChatView: View {
     }
     
     var body: some View {
-        NavigationView {
-            VStack {
-                CustomScrollView(scrollToEnd: true) {
-                    ForEach(self.chatHelper.realTimeMessages, id: \.self) { msg in
-                        MessageView(currentMessage: msg)
-                    }
+        VStack {
+            CustomScrollView(scrollToEnd: true) {
+                List(self.chatHelper.realTimeMessages, id: \.self) { msg in
+                    ContentMessageView(username: msg.username, contentMessage: msg.message)
                 }
-                HStack {
-                    TextField("Username...", text: $username)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .frame(minHeight: CGFloat(30))
-                    TextField("Message...", text: $typingMessage)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .frame(minHeight: CGFloat(30))
-                    Button(action: sendMessage) {
-                        Text("Send")
-                    }
-                }.frame(minHeight: CGFloat(50)).padding()
-            }.navigationBarTitle(Text("Chat"), displayMode: .inline)
-            .padding(.bottom, keyboard.currentHeight)
-            .edgesIgnoringSafeArea(keyboard.currentHeight == 0.0 ? .leading: .bottom)
-        }.onTapGesture {
+            }
+        }
+        .padding(.bottom, keyboard.currentHeight)
+        .edgesIgnoringSafeArea(keyboard.currentHeight == 0.0 ? .leading: .bottom)
+        .onTapGesture {
             self.endEditing(true)
+        }
+        
+        HStack {
+            TextField("Username...", text: $username)
+            .textFieldStyle(RoundedBorderTextFieldStyle())
+            .frame(minHeight: CGFloat(30))
+            TextField("Message...", text: $typingMessage)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .frame(minHeight: CGFloat(30))
+            Button(action: sendMessage) {
+                Text("Send")
+            }
         }
     }
     

@@ -40,7 +40,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func sceneWillEnterForeground(_ scene: UIScene) {
         chatHelper.setSockets()
-        chatHelper.getMessages()
+        chatHelper.reloadMessages()
         // Called as the scene transitions from the background to the foreground.
         // Use this method to undo the changes made on entering the background.
     }
@@ -68,6 +68,4 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         UIApplication.shared.endBackgroundTask(self.backgroundUpdateTask)
         self.backgroundUpdateTask = UIBackgroundTaskIdentifier.invalid
     }
-
 }
-

@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.pushNotifications.registerForRemoteNotifications()
         
         try? self.pushNotifications.addDeviceInterest(interest: "hello")
+
         return true
     }
 
@@ -26,6 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        
         self.pushNotifications.handleNotification(userInfo: userInfo)
     }
 

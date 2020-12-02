@@ -42,6 +42,22 @@ class ChatHelper : ObservableObject {
         }
     }
     
+    
+    func reloadMessages() {
+        Service.shared.loadHistoryFromServer() { (res, err) in
+            if err != nil {print(String(describing: err)); return} // an error is received print error to log and stop
+            DispatchQueue.main.async {
+                for item in res {
+                    let newMessage = Message(username: item.username, message: item.message);
+                    if (!self.realTimeMessages.contains(newMessage)) {
+                        self.realTimeMessages.append(newMessage)
+                    }
+                }
+            }
+        }
+    }
+    
+    
     func updateMessages(jsonData: Data) {
         do {
             

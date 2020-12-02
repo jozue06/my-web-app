@@ -9,26 +9,21 @@ struct ContentMessageView: View {
     var contentMessage: String
     
     var body: some View {
-        HStack {
-            VStack(alignment: .leading, spacing: 6) {
-                HStack {
-                    Text(username)
-                        .fontWeight(.bold)
-                        .font(.system(size: 12))
-                }
-
-                Text(contentMessage)
+        VStack(alignment: .leading, spacing: 6) {
+            HStack {
+                Text(username)
+                    .fontWeight(.bold)
+                    .font(.system(size: 12))
             }
-            .padding(10)
-            .foregroundColor(Color.black)
-            .background(Color.blue)
-            .cornerRadius(10)
 
+            Text(contentMessage)
         }
-        .transition(.scale(scale: 0, anchor: .topLeading))
-    }
-    
+        .padding(10)
+        .foregroundColor(Color.black)
+        .background(Color.blue)
+        .cornerRadius(10)
 
+    }
 }
 
 struct ContentMessageView_Previews: PreviewProvider {
