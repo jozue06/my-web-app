@@ -15,6 +15,6 @@ This app is run _AS-IS_. I take no responsibility for what goes on here. Use at 
 
 ### BlankFace?
 
-There are no guarantees or safeguards here. It is a BlankFace. No one is checking to see if it is safe here, or secure. No records are kept longer than the server keeps them. File sharing currently supported. Emoji's are not currently supported.
+There are no guarantees or safeguards here. It is a BlankFace. No one is checking to see if it is safe or secure. No records are kept longer than the server keeps them.
 
 # Just Chat.
